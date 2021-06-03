@@ -11,9 +11,9 @@ Java.perform(function(){
         },
         onLeave:function(retval){
             send("return:"+retval);
-            var env = Java.vm.getEnv();
-            var jstrings = env.newStringUtf("tamper");
-            retval.replace(jstrings);
+            var env = Java.vm.getEnv(); //获取env对象，也是native函数的第一个参数
+            var jstrings = env.newStringUtf("tamper"); //因为返回的是字符串指针，使用我们需要构造一个newStringUtf对象，用来代替这个指针
+            retval.replace(jstrings); //替换返回值
         }
     });
 });

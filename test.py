@@ -9,6 +9,6 @@ from frida.core import Script
 # 
 redv = frida.get_usb_device()
 
-front_app = redv.get_frontmost_application
+front_app = redv.get_frontmost_application()
 print(front_app)
 

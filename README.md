@@ -233,3 +233,212 @@ frida-server 可在 https://github.com/frida/frida/releases 下载
 另开命令行查看进程
 > frida-ps -U
 
+### 3.4、客户端命令
+
+#### 将脚本注册到 Android 目标进程
+
+`frida -U -l mybook.js com.xxx.xxxx`
+
+参数解释：
+
+- -U 指定对USB设备操作
+- -l 指定加载一个Javascript脚本
+- 最后指定一个进程名，如果想指定进程pid,用`-p`选项。正在运行的进程可以用`frida-ps -U`命令查看
+
+#### 重启一个 Android 进程并注入脚本
+
+`frida -U -l myhook.js -f com.xxx.xxxx --no-pause`
+
+参数解释：
+
+- -f 指定一个进程，重启它并注入脚本
+- --no-pause 自动运行程序
+
+这种注入脚本的方法，常用于hook在App就启动期就执行的函数。
+
+> frida运行过程中，执行`%resume`重新注入，执行`%reload`来重新加载脚本；执行`exit`结束脚本注入
+
+### 3.5、Hook Java 方法
+
+#### 载入类：
+
+`Java.use` 方法用于加载一个 Java 类，相当于 Java 的 `Class.forname()`
+
+例如加载一个 String 类：
+
+`var StringClass = Java.use("java.lang.String");`
+
+加载内部类：
+
+`var MyClass_InnerClass = Java.use("com.xxx.xxxx.MyClassInnerClass");`
+
+#### 修改函数实现：
+
+##### 函数参数类型表示：
+
+###### 基本类型：
+
+对于基本类型，直接用在 java 中的表示方法就可以，不用改变，如：int、short、char、byte、boolean、float、double、long
+
+###### 基本类型数组：
+
+基本类型数组，用左中括号接上基本类型的缩写，如 `[B` 表示 byte 数组
+
+缩写对照表
+
+| 基本类型 | 缩写 |
+| -------- | ---- |
+| boolean  | Z    |
+| byte     | B    |
+| char     | C    |
+| double   | D    |
+| float    | F    |
+| int      | I    |
+| long     | J    |
+| short    | S    |
+
+###### 任意类：
+
+任意类可直接写完整类名：`java.lang.String`
+
+###### 对象数组：
+
+对象数组，用左中括号接上完整类名再接上分号：`[java.lang.String;`
+
+##### 带参构造函数：
+
+修改参数为 byte[] 类型的构造函数的实现
+
+```js 
+ClassName.$init.overload("[B").implementation=function(param){
+    //do something
+}
+```
+
+> 注：ClassName 是使用 Java.use 定义的类；param 是函数体中访问的参数
+
+修改多参数的构造函数的实现
+
+```js
+ClassName.$init.overload('[B','int','int').implementation=function(param1,param2,param3){
+    //do something
+}
+```
+
+##### 无参数构造函数：
+
+```js
+ClassName.$init.overload().implementation=function(){
+    //do something
+}
+```
+
+调用原构造函数
+
+```js
+ClassName.$init.overload().implementation=function(){
+    this.$init();
+    //do something
+}
+```
+
+> 注意：当构造函数(函数)有多种重载形式，比如一个类中有两个形式的func：`void func()`和`void func(int)`，要加上overload来对函数进行重载，否则可以省略overload
+
+##### 一般函数：
+
+修改函数名为 func ，参数为 byte[] 类型的函数的实现
+
+```js
+ClassName.func.overload('[B').implementation=function(param){
+    //do somethint
+}
+```
+
+##### 无参数函数：
+
+```js
+ClassName.func.overload().implementation=function(){
+    //do something
+}
+```
+
+> 注： 在修改函数实现时，如果原函数有返回值，那么我们在实现时也要返回合适的值
+
+```js
+ClassName.func.overload().implementation=function(){
+    //do something
+    return this.func();
+}
+```
+
+#### 调用函数：
+
+和Java一样，创建类实例就是调用构造函数，而在这里用`$new`表示一个构造函数。
+
+```js
+var ClassName=Java.use("com.luoye.test.ClassName");
+var instance = ClassName.$new();
+```
+
+实例化以后调用其他函数
+
+```js
+var ClassName=Java.use("com.luoye.test.ClassName");
+var instance = ClassName.$new();
+instance.func();
+```
+
+#### 字段操作：
+
+字段赋值和读取要在字段名后加`.value`，假设有这样的一个类：
+
+```js
+package com.luoyesiqiu.app;
+public class Person{
+    private String name;
+    private int age;
+}
+```
+
+写个脚本操作Person类的name字段和age字段：
+
+```js
+var person_class = Java.use("com.luoyesiqiu.app.Person");
+//实例化Person类
+var person_class_instance = person_class.$new();
+//给name字段赋值
+person_class_instance.name.value = "luoyesiqiu";
+//给age字段赋值
+person_class_instance.age.value = 18;
+//输出name字段和age字段的值
+console.log("name = ",person_class_instance.name.value, "," ,"age = " ,person_class_instance.age.value);
+```
+
+输出：
+
+```
+name =  luoyesiqiu , age =  18
+```
+
+#### 类型转换
+
+用`Java.cast`方法来对一个对象进行类型转换，如将`variable`转换成`java.lang.String`：
+
+```js
+var StringClass=Java.use("java.lang.String");
+var NewTypeClass=Java.cast(variable,StringClass);
+```
+
+#### Java.available字段
+
+这个字段标记Java虚拟机（例如： Dalvik 或者 ART）是否已加载, 操作Java任何东西之前，要确认这个值是否为true
+
+#### Java.perform方法
+
+Java.perform(fn)在Javascript代码成功被附加到目标进程时调用，我们核心的代码要在里面写。格式：
+
+```js
+Java.perform(function(){
+//do something...
+});
+```
