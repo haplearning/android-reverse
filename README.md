@@ -472,13 +472,13 @@ windows 安装：
 
 安装步骤截图
 
-![image-20210608234148676](G:\android-reverse\images\image-20210608234148676.png)
+![image-20210608234148676](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608234148676.png)
 
-![image-20210608234749900](G:\android-reverse\images\image-20210608234749900.png)
+![image-20210608234749900](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608234749900.png)
 
-![image-20210608235301440](G:\android-reverse\images\image-20210608235301440.png)
+![image-20210608235301440](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608235301440.png)
 
-![image-20210608235401335](G:\android-reverse\images\image-20210608235401335.png)
+![image-20210608235401335](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608235401335.png)
 
 
 
@@ -492,9 +492,9 @@ windows 安装：
 
 
 
-![image-20210609003024658](G:\android-reverse\images\image-20210609003024658.png)
+![image-20210609003024658](https://github.com/haplearning/android-reverse/blob/main/images/image-20210609003024658.png)
 
-![image-20210609002542971](G:\android-reverse\images\image-20210609002542971.png)
+![image-20210609002542971](https://github.com/haplearning/android-reverse/blob/main/images/image-20210609002542971.png)
 
 ### APK Easy Tool 
 
