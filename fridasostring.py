@@ -31,3 +31,4 @@ script = process.create_script(jscode)
 script.on('message', printMessage)
 script.load()
 sys.stdin.read()
+
