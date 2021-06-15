@@ -674,15 +674,15 @@ Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProj
 
 Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProjects/` 下创建apk的副本）
 
-![image-20210615173747426](E:\android-reverse\images\image-20210615173747426.png)
+![image-20210615173747426](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615173747426.png)
 
-![image-20210615174541638](E:\android-reverse\images\image-20210615174541638.png)
+![image-20210615174541638](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615174541638.png)
 
 开启或重启设备
 
-![image-20210615174801334](E:\android-reverse\images\image-20210615174801334.png)
+![image-20210615174801334](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615174801334.png)
 
 打开 app 后会出现包名，且自动输出 app 日志
 
-![image-20210615175429956](E:\android-reverse\images\image-20210615175429956.png)
+![image-20210615175429956](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615175429956.png)
 
