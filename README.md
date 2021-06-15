@@ -526,14 +526,14 @@ Android 签名原理可参考知乎这篇文章：[都到2020年了，Android �
 
 查看签名：`keytool -v -list -keystore debug.keystore`
 
-![image-20210608111921362](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608111921362.png)
+![image-20210608111921362](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608111921362.png)
 
 查看 apk 的签名信息：
 
 - `jarsigner -verify -verbose -certs <.apk>` 
 -  `keytool -printcert -jarfile <.apk>` 只支持v1签名校验
 
-![image-20210608112303471](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608112303471.png)
+![image-20210608112303471](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608112303471.png)
 
 创建签名文件：
 
@@ -541,11 +541,11 @@ Android 签名原理可参考知乎这篇文章：[都到2020年了，Android �
 
 依次输入口令密码和签名信息，最后输入 `y` 确认签名，就会在当前目录下生成签名文件 `key.ketstore`
 
-![image-20210608114718865](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608114718865.png)
+![image-20210608114718865](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608114718865.png)
 
 查看签名：keytool -v -list -keystore key.keystore
 
-![image-20210608115016123](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608115016123.png)
+![image-20210608115016123](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608115016123.png)
 
 Keytool 常见选项：
 
@@ -567,9 +567,9 @@ Keytool 常见选项：
 
 命令行输入：`jarsigner -verbose -keystore key.keystore -signedjar signed_app-debug.apk  app-debug.apk  key.keystore`
 
-![image-20210608170250494](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608170250494.png)
+![image-20210608170250494](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608170250494.png)
 
-![image-20210608171055683](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608171055683.png)
+![image-20210608171055683](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608171055683.png)
 
 签名完成，拖进模拟器就可以安装了
 
@@ -614,11 +614,11 @@ Apksigner 是 Android_SDK 提供的签名方式，Android 现在已支持三种�
 
 Android studio 依次点击 `File-Setting-Plugins` 
 
-![image-20210607180508680](https://github.com/haplearning/android_reverse/blob/main/images/image-20210607180508680.png)
+![image-20210607180508680](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607180508680.png)
 
 安装后重启 Android studio，然后将处理 `*.smali` 的插件设置为 smalidea
 
-![image-20210607180933369](https://github.com/haplearning/android_reverse/blob/main/images/image-20210607180933369.png)
+![image-20210607180933369](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607180933369.png)
 
 ### 调试 smali
 
@@ -634,19 +634,19 @@ Android studio 依次点击 `File-Setting-Plugins`
 
 Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProjects/` 下创建apk的副本），并创建 `remote `调试，设置端口为 `8900`
 
-![image-20210608222712303](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608222712303.png)
+![image-20210608222712303](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608222712303.png)
 
-![image-20210607211527616](https://github.com/haplearning/android_reverse/blob/main/images/image-20210607211527616.png)![image-20210607211717435](https://github.com/haplearning/android_reverse/blob/main/images/image-20210607211717435.png)
+![image-20210607211527616](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211527616.png)![image-20210607211717435](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211717435.png)
 
-![image-20210607211951445](https://github.com/haplearning/android_reverse/blob/main/images/image-20210607211951445.png)
+![image-20210607211951445](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211951445.png)
 
 
 
 然后打开 smali 代码断点，启动调试，选择进程
 
-![image-20210608223533226](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608223533226.png)
+![image-20210608223533226](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608223533226.png)
 
-![image-20210608223647690](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608223647690.png)
+![image-20210608223647690](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608223647690.png)
 
 
 
@@ -654,7 +654,7 @@ Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProj
 
 
 
-![image-20210608223800443](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608223800443.png)
+![image-20210608223800443](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608223800443.png)
 
 
 
@@ -662,9 +662,9 @@ Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProj
 
 
 
-![image-20210608223854885](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608223854885.png)
+![image-20210608223854885](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608223854885.png)
 
-![image-20210608224002233](https://github.com/haplearning/android_reverse/blob/main/images/image-20210608224002233.png)
+![image-20210608224002233](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608224002233.png)
 
 
 
