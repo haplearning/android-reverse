@@ -526,7 +526,7 @@ Android 签名原理可参考知乎这篇文章：[都到2020年了，Android �
 
 查看签名：`keytool -v -list -keystore debug.keystore`
 
-![image-20210608111921362](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608111921362.png)
+![image-20210615235357713](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615235357713.png)
 
 查看 apk 的签名信息：
 
@@ -541,7 +541,7 @@ Android 签名原理可参考知乎这篇文章：[都到2020年了，Android �
 
 依次输入口令密码和签名信息，最后输入 `y` 确认签名，就会在当前目录下生成签名文件 `key.ketstore`
 
-![image-20210608114718865](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608114718865.png)
+![image-20210608114637201](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608114637201.png)
 
 查看签名：keytool -v -list -keystore key.keystore
 
@@ -636,7 +636,9 @@ Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProj
 
 ![image-20210608222712303](https://github.com/haplearning/android-reverse/blob/main/images/image-20210608222712303.png)
 
-![image-20210607211527616](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211527616.png)![image-20210607211717435](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211717435.png)
+![image-20210607211527616](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211527616.png)
+
+![image-20210607211717435](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211717435.png)
 
 ![image-20210607211951445](https://github.com/haplearning/android-reverse/blob/main/images/image-20210607211951445.png)
 
