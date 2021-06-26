@@ -159,13 +159,18 @@ Android 7.0 以上，系统不再新人用户级的证书，只信任系统级�
 
    > openssl x509 -inform DER -in xxx.cer -out cacert.pem 
 
-3.  用 `md5` 方式显示 `pem` 证书的 `hash` 值
+3. 用 `md5` 方式显示 `pem` 证书的 `hash` 值
 
- > openssl x509 -inform PEM -subject_hash_old -in cacert.pem	//v>1.0
- > openssl x509 -inform PEM -subject_hash -in cacert.pem //v<1.0
+   >openssl x509 -inform PEM -subject_hash_old -in cacert.pem	//v>1.0
+   >openssl x509 -inform PEM -subject_hash -in cacert.pem //v<1.0
 
 4. 将 `.pem` 证书重命名为 3 步查出来的值（`.0`结尾）
-5. 将新证书放到手机系统目录：`/system/etc/security/cacerts`(需root)
+
+5. 将新证书放到手机系统目录：`/system/etc/security/cacerts`(需root)，并修改权限
+
+   >adb shell "su -c 'mount -o rw,remount /system'"
+   >
+   >adb shell "chmod 644 /system/etc/security/cacerts/xxx.0"
 
 
 
@@ -485,7 +490,7 @@ windows 安装：
 #### 常用命令
 
 - `apktool d <.apk> [-o apk]`：反编译 apk ，默认输出当前目录，可指定输出目录
-- `apktool b <apk> [-o <.apk>]`：回编译 apk，默认输出当前目录，可指定输出目录
+- `apktool b <apk> [-o <.apk>]`：回编译 apk，默认输出 apk 为目录下的 `dist` 目录，可指定输出目录
 - `apktool -b <apk> -p <frameworkdir> [-o <out.apk>`：`-p` 指定 `framework` 文件；空 `framework` 文件夹可忽略回编译时的 `'compileSdkVersion'/'compileSdkVersionCodename'/'appComponentFactory'` 错误
 
 **注意：回编译后的 apk 文件需经过 签名 后才能够被安装**
@@ -579,7 +584,7 @@ Jarsigner 常见选项
 | ---- | ---- |
 |-keystore|keystore 包含你私钥的存储文件|
 |-verbose|显示输出动作。|
-|-signedjar|后街签名后的apk名称 和 待签名的apk|
+|-signedjar|后接签名后的apk名称 和 待签名的apk|
 |-sigalg|签名算法，用 SHA1withRSA.|
 |-digestalg|消息摘要算法，用 SHA1.|
 |-storepass|存储文件的密码。 主要为了安全起见，如果没提供，jarsigner会提示你输入。|
@@ -688,3 +693,30 @@ Android studio 以 `Profile or Debug APK`  打开 apk（在主目录下`/ApkProj
 
 ![image-20210615175429956](https://github.com/haplearning/android-reverse/blob/main/images/image-20210615175429956.png)
 
+
+
+# IDA 调试 so
+
+
+
+# 脱壳
+
+## 
+
+## 加固
+
+App 常用加固厂商特征
+
+> 娜迦： libchaosvmp.so, libddog.so，libfdog.so
+> 爱加密：libexec.so,libexecmain.so，ijiami.dat
+> 梆梆： libsecexe.so,libsecmain.so , libDexHelper.so
+> 360：libprotectClass.so,libjiagu.so， libjiagu_art.so，libjiagu_x86.so
+> 通付盾：libegis.so，libNSaferOnly.so
+> 网秦：libnqshield.so
+> 百度：libbaiduprotect.so
+> 腾讯：libshellx-2.10.6.0.so，libBugly.so，libtup.so, libexec.so，libshell.so
+> 阿里聚安全：aliprotect.dat，libsgmain.so，libsgsecuritybody.so
+> 腾讯御安全：libtosprotection.armeabi.so，libtosprotection.armeabi-v7a.so，libtosprotection.x86.so
+> 网易易盾：libnesec.so
+> APKProtect:libAPKProtect.so
+> 几维安全：libkwscmm.so, libkwscr.so, libkwslinker.so
